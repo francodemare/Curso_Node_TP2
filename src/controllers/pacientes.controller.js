@@ -25,6 +25,12 @@ module.exports = {
             const pacientes = await models.paciente.findOne({
                 where: {
                     id: req.params.id
+                },
+                include: {
+                    model: models.paciente_medico,
+                    include: [{
+                        model: models.medico
+                    }]
                 }
             })
 
@@ -43,6 +49,11 @@ module.exports = {
     crear: async (req, res, next) => {
         try {
             const pacientes = await models.paciente.create(req.body)
+
+            const relacion = await models.paciente_medico.create({
+                pacienteId: pacientes.id,
+                medicoId: req.body.medico_id
+            })
 
             res.json({
                 success: true,
