@@ -1,6 +1,7 @@
 // Controller de medicos
 
 const models = require('../database/models') // importar el modelo de usuario
+const errors = require('../const/errors')
 
 module.exports = {
 
@@ -18,6 +19,28 @@ module.exports = {
                 success: true,
                 data: {
                     medicos: medicos
+                }
+            })
+
+        } catch (err) {
+            return next(err)
+        }
+    },
+    listarInfo: async (req, res, next) => {
+        try {
+            const medicos = await models.medico.findOne({
+                where: {
+                    id: req.params.id
+                }
+            })
+            if (!medicos) {
+                return next(errors.MedicoInexistente)
+            }
+
+            res.json({
+                success: true,
+                data: {
+                    pacientes: pacientes
                 }
             })
 

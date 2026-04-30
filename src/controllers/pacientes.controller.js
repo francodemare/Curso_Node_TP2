@@ -1,6 +1,7 @@
 // Controller de pacientes
 
 const models = require('../database/models') // importar el modelo de usuario
+const errors = require('../const/errors')
 
 module.exports = {
 
@@ -33,6 +34,9 @@ module.exports = {
                     }]
                 }
             })
+            if (!pacientes) {
+                return next(errors.PacienteInexistente)
+            }
 
             res.json({
                 success: true,

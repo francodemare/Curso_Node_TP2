@@ -9,6 +9,9 @@
 
 const globalConstants = require('./const/globalConstants.js') // importar el archivo de constantes globales
 const routerConfig = require('./routes/index.routes.js')
+const errorHandler = require('./middlewares/erros.js')
+
+let createError = require('http-errors')
 
 const express = require('express') // Importamos el framework express
 const port = globalConstants.PORT_SERVER
@@ -22,6 +25,12 @@ const configuracionApi = (app) => {
 
 const configuracionRouter = (app) => {
     app.use('/api/', routerConfig.rutas_init())
+
+    // catch 404 and forward to error handler
+    app.use(function (req, res, next) {
+        next(createError(404))
+    })
+    app.use(errorHandler)
 }
 
 const init = () => { // Middleware para procesar cuerpos de peticiones en formato JSON (necesario para POST/PUT)

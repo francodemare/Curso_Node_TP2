@@ -10,11 +10,14 @@
     "start": "nodemon src/index.js",
     "dev": "nodemon src/index.js",
     "test": "primer",
-    "db:create": "npx sequelize-cli db:create"
+    "db:create": "npx sequelize-cli db:create",
+    "db:seed": "npx sequelize-cli db:seed:all",
+    "db:migrate": "npx sequelize-cli db:migrate"
   },
   "dependencies": {
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "joi": "^18.1.2",
     "morgan": "^1.10.1",
     "pg": "^8.20.0",
     "pg-hstore": "^2.3.4",
