@@ -25,6 +25,7 @@ const configuracionApi = (app) => {
 
 const configuracionRouter = (app) => {
     app.use('/api/', routerConfig.rutas_init())
+    app.use('/', routerConfig.rutas_auth())
 
     // catch 404 and forward to error handler
     app.use(function (req, res, next) {

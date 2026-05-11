@@ -23,6 +23,10 @@ module.exports = (sequelize, DataTypes) => {
         edad: {
             type: DataTypes.INTEGER,
         },
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         profesion: {
             type: DataTypes.STRING,
             allowNull: true,
@@ -51,6 +55,7 @@ module.exports = (sequelize, DataTypes) => {
     Paciente.associate = models => {
         // aca se relacionan las tablas de la base de datos  
         Paciente.hasMany(models.paciente_medico)
+        Paciente.hasMany(models.archivo_paciente)
     }
 
     return Paciente
